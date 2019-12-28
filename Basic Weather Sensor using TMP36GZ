@@ -1,0 +1,27 @@
+#include <LiquidCrystal.h>
+
+LiquidCrystal lcd(12,11,5,4,3,2); 
+
+const int sensorPin = A0; //sensor reading
+
+void setup(void) 
+{
+  lcd.begin(16, 2);
+  lcd.print("Hello Marie.");
+}
+
+void loop() 
+{
+  delay(2000); //protects sensor, welcome message readable
+
+  int sensorVal = analogRead(sensorPin);
+    
+  float voltage = (sensorVal/1024.0) * 5.0; //sensorVal to volts
+    
+  float temperature = (voltage - .5) * 100; //volts to temp
+    
+ lcd.clear();
+ lcd.print("T: ");
+ lcd.print(temperature); //temperature, not "Temperature"
+ lcd.print(" C");
+}
